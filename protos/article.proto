@@ -1,22 +1,31 @@
 syntax = "proto3";
 
-service Article {
-  rpc Get (GetRequest) returns (ArticleReply) {}
-  rpc List (Empty) returns (stream ArticleReply) {}
-  rpc Create (CreateReuqest) returns (ArticleReply) {}
+package grpcapi.articles;
+
+service Articles {
+  rpc Get (ID) returns (FullContent) {}
+  rpc List (Empty) returns (FullContent) {}
+  rpc Create (NewContent) returns (FullContent) {}
+  rpc Update (UpdatingContent) returns (FullContent) {}
+  rpc Destroy (ID) returns (FullContent) {}
 }
 
 message Empty {}
 
-message GetRequest {
+message ID {
   int32 id = 1;
 }
 
-message CreateReuqest {
+message NewContent {
   string title = 1;
 }
 
-message ArticleReply {
+message UpdatingContent {
+  int32 id = 1;
+  string title = 2;
+}
+
+message FullContent {
   int32 id = 1;
   string title = 2;
   string created_at = 3;

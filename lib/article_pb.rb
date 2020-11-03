@@ -5,15 +5,19 @@ require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("article.proto", :syntax => :proto3) do
-    add_message "Empty" do
+    add_message "grpcapi.articles.Empty" do
     end
-    add_message "GetRequest" do
+    add_message "grpcapi.articles.ID" do
       optional :id, :int32, 1
     end
-    add_message "CreateReuqest" do
+    add_message "grpcapi.articles.NewContent" do
       optional :title, :string, 1
     end
-    add_message "ArticleReply" do
+    add_message "grpcapi.articles.UpdatingContent" do
+      optional :id, :int32, 1
+      optional :title, :string, 2
+    end
+    add_message "grpcapi.articles.FullContent" do
       optional :id, :int32, 1
       optional :title, :string, 2
       optional :created_at, :string, 3
@@ -22,7 +26,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
 end
 
-Empty = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("Empty").msgclass
-GetRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("GetRequest").msgclass
-CreateReuqest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("CreateReuqest").msgclass
-ArticleReply = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("ArticleReply").msgclass
+module Grpcapi
+  module Articles
+    Empty = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("grpcapi.articles.Empty").msgclass
+    ID = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("grpcapi.articles.ID").msgclass
+    NewContent = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("grpcapi.articles.NewContent").msgclass
+    UpdatingContent = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("grpcapi.articles.UpdatingContent").msgclass
+    FullContent = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("grpcapi.articles.FullContent").msgclass
+  end
+end
