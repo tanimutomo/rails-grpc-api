@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+service Article {
+  rpc Get (GetRequest) returns (ArticleReply) {}
+  rpc List (Empty) returns (stream ArticleReply) {}
+  rpc Create (CreateReuqest) returns (ArticleReply) {}
+}
+
+message Empty {}
+
+message GetRequest {
+  int32 id = 1;
+}
+
+message CreateReuqest {
+  string title = 1;
+}
+
+message ArticleReply {
+  int32 id = 1;
+  string title = 2;
+  string created_at = 3;
+  string updated_at = 4;
+}
